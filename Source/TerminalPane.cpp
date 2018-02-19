@@ -1,5 +1,5 @@
 
-#include "OutputPane.h"
+#include "TerminalPane.h"
 #include <QTextEdit>
 #include <QPushButton>
 #include <QVBoxLayout>
@@ -8,8 +8,9 @@
 #include "sstream"
 #include "iostream"
 #include "stdio.h"
+#include "Process.h"
 
-OutputPane::OutputPane()
+TerminalPane::TerminalPane()
     : QDockWidget("Output", 0, 0)
     //, stdoutPipe(stdout)
 {
@@ -23,11 +24,17 @@ OutputPane::OutputPane()
         {
             hLayout->setMargin(0);
 
-            auto button = new QPushButton("Clear");
-            button->setIcon(QIcon());
-            button->setMaximumSize(100, 30);
-            hLayout->addWidget(button);
-            connect(button, SIGNAL(clicked()), this, SLOT(clear()));
+            auto runButton = new QPushButton("Run");
+            runButton->setIcon(QIcon());
+            runButton->setMaximumSize(100, 30);
+            hLayout->addWidget(runButton);
+            connect(runButton, SIGNAL(clicked()), this, SLOT(run()));
+
+            auto clearButton = new QPushButton("Clear");
+            clearButton->setIcon(QIcon());
+            clearButton->setMaximumSize(100, 30);
+            hLayout->addWidget(clearButton);
+            connect(clearButton, SIGNAL(clicked()), this, SLOT(clear()));
 
             //button = new QPushButton("Clear");
             //button->setMaximumSize(100, 30);
@@ -50,12 +57,17 @@ OutputPane::OutputPane()
     timer.start(100);
 }
 
-void OutputPane::clear()
+void TerminalPane::run()
+{
+
+}
+
+void TerminalPane::clear()
 {
     edit->setPlainText(tr(""));
 }
 
-void OutputPane::work()
+void TerminalPane::work()
 {
     /*fflush(stdout);
 
@@ -67,7 +79,7 @@ void OutputPane::work()
     }*/
 }
 
-OutputPane::~OutputPane()
+TerminalPane::~TerminalPane()
 {
 }
 

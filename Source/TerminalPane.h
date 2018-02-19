@@ -7,15 +7,16 @@
 
 class QTextEdit;
 
-class OutputPane : public QDockWidget
+class TerminalPane : public QDockWidget
 {
     Q_OBJECT
 
 public:
-    OutputPane();
-    ~OutputPane();
+    TerminalPane();
+    ~TerminalPane();
 
 private slots:
+    void run();
     void clear();
     void work();
 

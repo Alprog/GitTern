@@ -38,6 +38,15 @@ void WinProcess::run(std::string path, std::string commandLine, std::string dire
     }
 }
 
+void WinProcess::stop()
+{
+    if (isRunning())
+    {
+        TerminateProcess(handle, 1);
+    }
+    handle = 0;
+}
+
 bool WinProcess::isRunning()
 {
     if (handle != 0)
@@ -60,11 +69,12 @@ bool WinProcess::isRunning()
     return false;
 }
 
-void WinProcess::stop()
+void WinProcess::writeInput(std::string inputString)
 {
-    if (isRunning())
-    {
-        TerminateProcess(handle, 1);
-    }
-    handle = 0;
+
+}
+
+std::string WinProcess::readOutput()
+{
+    return "";
 }

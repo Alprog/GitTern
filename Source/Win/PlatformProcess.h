@@ -10,9 +10,11 @@ public:
     WinProcess();
     ~WinProcess();
 
-    virtual void run(std::string path, std::string commandLine, std::string directory);
-    virtual void stop();
-    virtual bool isRunning();
+    virtual void run(std::string path, std::string commandLine, std::string directory) override;
+    virtual void stop() override;
+    virtual bool isRunning() override;
+    virtual void writeInput(std::string inputString) override;
+    virtual std::string readOutput() override;
 
     HANDLE handle;
     HANDLE outFileHandle;

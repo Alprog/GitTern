@@ -12,7 +12,7 @@
 #include "Menu/FileMenu.h"
 #include "Menu/TrayMenu.h"
 #include "TernApp.h"
-#include "OutputPane.h"
+#include "TerminalPane.h"
 #include "DocumentsPane.h"
 
 MainWindow::MainWindow(QWidget* parent)
@@ -36,7 +36,7 @@ MainWindow::MainWindow(QWidget* parent)
     //documents = new DocumentsPane;
     //setCentralWidget(documents);
 
-    addDockWidget(Qt::RightDockWidgetArea, new OutputPane());
+    addDockWidget(Qt::RightDockWidgetArea, new TerminalPane());
 
     setCentralWidget(new DocumentsPane());
 }
