@@ -8,8 +8,8 @@ TrayMenu::TrayMenu(MainWindow* window)
 {
     QList<QAction*> actions
     {
-        createAction("Show", "", SLOT(showMainWindow())),
-        createAction("Quit", "", SLOT(closeApp())),
+        createAction("Show", "empty", SLOT(showMainWindow())),
+        createAction("Quit", "empty", SLOT(closeApp())),
     };
     addActions(actions);
 }

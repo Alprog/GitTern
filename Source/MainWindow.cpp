@@ -12,6 +12,8 @@
 #include "Menu/FileMenu.h"
 #include "Menu/TrayMenu.h"
 #include "TernApp.h"
+#include "OutputPane.h"
+#include "DocumentsPane.h"
 
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent)
@@ -33,6 +35,10 @@ MainWindow::MainWindow(QWidget* parent)
 
     //documents = new DocumentsPane;
     //setCentralWidget(documents);
+
+    addDockWidget(Qt::RightDockWidgetArea, new OutputPane());
+
+    setCentralWidget(new DocumentsPane());
 }
 
 MainWindow::~MainWindow()
