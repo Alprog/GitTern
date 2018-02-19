@@ -15,11 +15,9 @@ private:
     void createActions();
 
     bool eventFilter(QObject* obj, QEvent* event) override;
+    void closeEvent(QCloseEvent *event) override;
 
     QMenu* fileMenu;
-    QMenu* editMenu;
-    QMenu* debugMenu;
-    QMenu* windowMenu;
 
     bool modificationChecking;
 };

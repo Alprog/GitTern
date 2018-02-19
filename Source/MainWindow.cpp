@@ -7,8 +7,11 @@
 #include <QDockWidget>
 #include <QFileDialog>
 #include <QEvent>
+#include <QCloseEvent>
 #include <iostream>
 #include "Menu/FileMenu.h"
+#include "Menu/TrayMenu.h"
+#include "TernApp.h"
 
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent)
@@ -70,4 +73,13 @@ bool MainWindow::eventFilter(QObject* obj, QEvent* event)
     }
 
     return QMainWindow::eventFilter(obj, event);
+}
+
+void MainWindow::closeEvent(QCloseEvent* event)
+{
+    if (TernApp::getInstance()->isTrayIconVisible())
+    {
+        hide();
+        event->ignore();
+    }
 }
