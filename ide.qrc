@@ -1,0 +1,21 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/new.png</file>
+        <file>images/open.png</file>
+        <file>images/save.png</file>
+        <file>images/icon.png</file>
+        <file>images/icon128.png</file>
+        <file>images/pause.png</file>
+        <file>images/stepinto.png</file>
+        <file>images/stepout.png</file>
+        <file>images/stepover.png</file>
+        <file>images/stop.png</file>
+        <file>images/play.png</file>
+        <file>images/play_disabled.png</file>
+        <file>images/pause_disabled.png</file>
+        <file>images/stepinto_disabled.png</file>
+        <file>images/stepout_disabled.png</file>
+        <file>images/stepover_disabled.png</file>
+        <file>images/stop_disabled.png</file>
+    </qresource>
+</RCC>
