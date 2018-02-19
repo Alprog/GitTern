@@ -30,7 +30,22 @@ TEMPLATE = app
 CONFIG += qt
 QT += widgets
 
-HEADERS += $$files(Source/*.h, true)
-SOURCES += $$files(Source/*.cpp, true)
+subdirs = Source Source/Menu
+
+for(subdir, subdirs) {
+    dirs += $$subdir
+
+    win:   dirs += $$subdir/Win
+    linux: dirs += $$subdir/Linux $$subdir/Unix
+    mac:   dirs += $$subdir/Mac $$subdir/Unix
+}
+
+for(dir, dirs) {
+    INCLUDEPATH += $$dir
+    HEADERS += $$files($$dir/*.h)
+    HEADERS += $$files($$dir/*.tpp)
+    SOURCES += $$files($$dir/*.cpp)
+    SOURCES += $$files($$dir/*.mm)
+}
 
 RESOURCES = ide.qrc
