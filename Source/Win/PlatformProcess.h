@@ -3,6 +3,7 @@
 
 #include "Process.h"
 #include <windows.h>
+#include "Pipe.h"
 
 class WinProcess : public Process
 {
@@ -16,8 +17,9 @@ public:
     virtual void writeInput(std::string inputString) override;
     virtual std::string readOutput() override;
 
+    Pipe* pipe;
+
     HANDLE handle;
-    HANDLE outFileHandle;
 };
 
 using PlatformProcess = WinProcess;

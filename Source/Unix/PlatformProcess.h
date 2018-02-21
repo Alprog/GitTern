@@ -16,3 +16,5 @@ public:
 
     pid_t pid;
 };
+
+using PlatformProcess = UnixProcess;

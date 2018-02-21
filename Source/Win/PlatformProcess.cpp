@@ -1,12 +1,13 @@
 
 #include <PlatformProcess.h>
+#include <PlatformPipe.h>
 
 #include <locale>
 #include <codecvt>
+#include <io.h>
 
 WinProcess::WinProcess()
     : handle{0}
-    , outFileHandle{0}
 {
 }
 
@@ -24,14 +25,21 @@ void WinProcess::run(std::string path, std::string commandLine, std::string dire
     auto wcommandLine = converter.from_bytes(commandLine.c_str());
     auto wdirectory = converter.from_bytes(directory.c_str());
 
+
+    pipe = Pipe::create();
+
     STARTUPINFO startupinfo;
     ZeroMemory(&startupinfo, sizeof(startupinfo));
     startupinfo.cb = sizeof(STARTUPINFO);
+    //startupinfo.hStdInput = g_hChildStd_IN_Rd;
+    startupinfo.hStdOutput = static_cast<PlatformPipe*>(pipe)->getWriteHandle();
+    startupinfo.hStdError = static_cast<PlatformPipe*>(pipe)->getWriteHandle();
+    startupinfo.dwFlags |= STARTF_USESTDHANDLES;
 
     PROCESS_INFORMATION processInfo;
     ZeroMemory(&(processInfo), sizeof(processInfo));
 
-    auto result = CreateProcess(wpath.c_str(), &wcommandLine[0], 0, 0, FALSE, 0, 0, wdirectory.c_str(), &startupinfo, &processInfo);
+    auto result = CreateProcess(wpath.c_str(), &wcommandLine[0], 0, 0, TRUE, CREATE_NO_WINDOW, 0, wdirectory.c_str(), &startupinfo, &processInfo);
     if (result != 0)
     {
         handle = processInfo.hProcess;
@@ -62,10 +70,6 @@ bool WinProcess::isRunning()
             handle = 0;
         }
     }
-    if (outFileHandle != 0)
-    {
-        CloseHandle(outFileHandle);
-    }
     return false;
 }
 
@@ -76,5 +80,5 @@ void WinProcess::writeInput(std::string inputString)
 
 std::string WinProcess::readOutput()
 {
-    return "";
+    return pipe->readText();
 }

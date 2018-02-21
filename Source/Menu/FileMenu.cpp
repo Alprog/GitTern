@@ -1,6 +1,7 @@
 
 #include "FileMenu.h"
 #include <QFileDialog>
+#include "TernApp.h"
 
 FileMenu::FileMenu(MainWindow* window)
     : BaseMenu{"File", window}
@@ -10,6 +11,7 @@ FileMenu::FileMenu(MainWindow* window)
         createAction("New", "new", SLOT(newFile()), QKeySequence::New),
         createAction("Open", "open", SLOT(openFile()), QKeySequence::Open),
         createAction("Save", "save", SLOT(saveFile()), QKeySequence::Save),
+        createAction("Exit", "", SLOT(closeApp()))
     };
     addActions(actions);
 }
@@ -24,4 +26,9 @@ void FileMenu::openFile()
 
 void FileMenu::saveFile()
 {
+}
+
+void FileMenu::closeApp()
+{
+    TernApp::getInstance()->quit();
 }

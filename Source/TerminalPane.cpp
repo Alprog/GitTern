@@ -59,7 +59,30 @@ TerminalPane::TerminalPane()
 
 void TerminalPane::run()
 {
+    auto p = Process::create();
 
+    auto path = "C:/Program Files/Git/cmd/git.exe";
+    auto commandLine = "status";
+    auto directory = "C:/GitTern";
+
+    p->run(path, commandLine, directory);
+
+    printf("start\n");
+    if (p->isRunning())
+    {
+        printf("running...\n");
+    }
+    int i = 0;
+    while (p->isRunning())
+    {
+        i++;
+    }
+    printf("end\n");
+
+    auto outputText = p->readOutput();
+
+    printf("== %s ==\n", outputText.c_str());
+    fflush(stdout);
 }
 
 void TerminalPane::clear()
