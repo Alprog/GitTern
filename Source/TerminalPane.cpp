@@ -62,7 +62,7 @@ void TerminalPane::run()
     auto p = Process::create();
 
     auto path = "C:/Program Files/Git/cmd/git.exe";
-    auto commandLine = "status";
+    auto commandLine = "git status";
     auto directory = "C:/GitTern";
 
     p->run(path, commandLine, directory);

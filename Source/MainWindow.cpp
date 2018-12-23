@@ -14,6 +14,7 @@
 #include "TernApp.h"
 #include "TerminalPane.h"
 #include "DocumentsPane.h"
+#include "LogPane.h"
 
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent)
@@ -28,14 +29,7 @@ MainWindow::MainWindow(QWidget* parent)
     this->setAnimated(true);
     this->setDockNestingEnabled(true);
 
-    //addDockWidget(Qt::BottomDockWidgetArea, new OutputPane());
-    //addDockWidget(Qt::RightDockWidgetArea, new StackPane());
-    //addDockWidget(Qt::LeftDockWidgetArea, new HierarchyPane());
-    //addDockWidget(Qt::LeftDockWidgetArea, new InspectorPane());
-
-    //documents = new DocumentsPane;
-    //setCentralWidget(documents);
-
+    addDockWidget(Qt::LeftDockWidgetArea, new LogPane());
     addDockWidget(Qt::RightDockWidgetArea, new TerminalPane());
 
     setCentralWidget(new DocumentsPane());
