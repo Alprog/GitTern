@@ -39,7 +39,7 @@ void WinProcess::run(std::string path, std::string commandLine, std::string dire
     PROCESS_INFORMATION processInfo;
     ZeroMemory(&(processInfo), sizeof(processInfo));
 
-    auto result = CreateProcess(wpath.c_str(), &wcommandLine[0], 0, 0, TRUE, CREATE_NO_WINDOW, 0, wdirectory.c_str(), &startupinfo, &processInfo);
+    auto result = CreateProcess(wpath.c_str(), &wcommandLine[0], nullptr, nullptr, TRUE, CREATE_NO_WINDOW, nullptr, wdirectory.c_str(), &startupinfo, &processInfo);
     if (result != 0)
     {
         handle = processInfo.hProcess;
@@ -52,12 +52,12 @@ void WinProcess::stop()
     {
         TerminateProcess(handle, 1);
     }
-    handle = 0;
+    handle = nullptr;
 }
 
 bool WinProcess::isRunning()
 {
-    if (handle != 0)
+    if (handle != nullptr)
     {
         DWORD exitCode;
         GetExitCodeProcess(handle, &exitCode);
@@ -67,15 +67,14 @@ bool WinProcess::isRunning()
         }
         else
         {
-            handle = 0;
+            handle = nullptr;
         }
     }
     return false;
 }
 
-void WinProcess::writeInput(std::string inputString)
+void WinProcess::writeInput(std::string)
 {
-
 }
 
 std::string WinProcess::readOutput()

@@ -15,6 +15,7 @@ public:
     ~LogPane();
 
 private slots:
+    void refresh();
 
 private:
     QTableWidget* table;
