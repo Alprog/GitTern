@@ -2,10 +2,10 @@
 #pragma once
 #include <string>
 
-class Commit
+struct Commit
 {
-    public std::string guid;
-    public std::string author;
-    public time_t timestamp;
-    public std::string title;
+    std::string guid;
+    std::string author;
+    time_t timestamp;
+    std::string title;
 };

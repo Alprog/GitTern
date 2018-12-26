@@ -2,6 +2,9 @@
 #include "LogPane.h"
 #include <QTableWidgetItem>
 #include <QHeaderView>
+#include <Commit.h>
+#include <PrettyFormatter.h>
+#include <PrettyField.h>
 
 LogPane::LogPane()
     : QDockWidget("Log", nullptr, nullptr)
@@ -31,9 +34,18 @@ LogPane::LogPane()
     setWidget(table);
 
     //git log -n 3 --decorate=short --pretty="%H%n%P%n%an (%ae)%n%at%n%s%n%N%n%D%n---%n"
+    refresh();
 }
 
 LogPane::~LogPane()
 {
+}
+
+void LogPane::refresh()
+{
+    PrettyFormatter<Commit> formatter;
+    formatter.addField<std::string>(&Commit::guid, "%H");
+    formatter.addField<std::string>(&Commit::author, "an (%ae)");
+    formatter.addField<std::string>(&Commit::title, "%s");
 }
 
