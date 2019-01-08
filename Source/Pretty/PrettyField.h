@@ -8,6 +8,7 @@ class BasePrettyField
 {
 public:
     std::string format;
+    virtual void apply(DataT* instance, std::string output) = 0;
 };
 
 template <class DataT, class FieldT>
@@ -26,8 +27,8 @@ public:
         this->format = format;
     }
 
-    void apply(DataT* instance, std::string output)
+    virtual void apply(DataT* instance, std::string output) override
     {
-        instance.*pointerToMember = output;
+        instance->*pointerToMember = output;
     }
 };

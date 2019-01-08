@@ -47,5 +47,7 @@ void LogPane::refresh()
     formatter.addField<std::string>(&Commit::guid, "%H");
     formatter.addField<std::string>(&Commit::author, "an (%ae)");
     formatter.addField<std::string>(&Commit::title, "%s");
+
+    formatter.parse("efef");
 }
 
