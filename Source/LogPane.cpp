@@ -46,8 +46,7 @@ void LogPane::refresh()
     PrettyFormatter<Commit> formatter;
     formatter.addField<std::string>(&Commit::guid, "%H");
     formatter.addField<std::string>(&Commit::author, "an (%ae)");
+    formatter.addField<time_t>(&Commit::timestamp, "%ct");
     formatter.addField<std::string>(&Commit::title, "%s");
-
-    formatter.parse("efef");
 }
 

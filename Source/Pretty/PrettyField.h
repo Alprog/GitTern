@@ -3,32 +3,36 @@
 
 #include <string>
 
-template <class DataT>
+template <class ClassT>
 class BasePrettyField
 {
 public:
     std::string format;
-    virtual void apply(DataT* instance, std::string output) = 0;
+
+    virtual void apply(ClassT* instance, std::string output) = 0;
 };
 
-template <class DataT, class FieldT>
-class PrettyField : public BasePrettyField<DataT>
+template <class ClassT, class FieldT>
+class PrettyField : public BasePrettyField<ClassT>
 {
 public:
-    using PointerToMember = FieldT DataT::*;
+    using PointerToMember = FieldT ClassT::*;
+    using Converter = FieldT(*)(std::string);
 
 private:
     PointerToMember pointerToMember;
+    Converter converter;
 
 public:
-    PrettyField(PointerToMember pointerToMember, std::string format)
+    PrettyField(PointerToMember pointerToMember, std::string format, Converter converter)
     {
         this->pointerToMember = pointerToMember;
         this->format = format;
+        this->converter = converter;
     }
 
-    virtual void apply(DataT* instance, std::string output) override
+    virtual void apply(ClassT* instance, std::string output) override
     {
-        instance->*pointerToMember = output;
+        instance->*pointerToMember = converter(output);
     }
 };

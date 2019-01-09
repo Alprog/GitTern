@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "PrettyField.h"
+#include "DefaultPrettyConverter.h"
 #include "Utils.h"
 
 template <class T>
@@ -15,9 +16,14 @@ private:
 
 public:
     template <class FieldT>
-    void addField(typename PrettyField<T, FieldT>::PointerToMember pointerToMember, std::string format)
+    void addField(typename PrettyField<T, FieldT>::PointerToMember pointerToMember, std::string format, typename PrettyField<T, FieldT>::Converter converter = nullptr)
     {
-        fields.push_back(new PrettyField<T, FieldT>(pointerToMember, format));
+        if (converter == nullptr)
+        {
+            converter = DefaultPrettyConverter<FieldT>::convert;
+        }
+
+        fields.push_back(new PrettyField<T, FieldT>(pointerToMember, format, converter));
     }
 
     std::vector<T> parse(std::string text)
