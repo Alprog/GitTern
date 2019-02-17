@@ -4,7 +4,7 @@
 
 void CommitDelegate::paint(QPainter* painter, const QStyleOptionViewItem& opt, const QModelIndex& index) const
 {
-    (void)index;
+    QStyledItemDelegate::paint(painter, opt, index);
 
     if (opt.state & QStyle::State_Selected)
     {
