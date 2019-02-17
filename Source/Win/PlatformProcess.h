@@ -9,9 +9,9 @@ class WinProcess : public Process
 {
 public:
     WinProcess();
-    ~WinProcess();
+    ~WinProcess() override;
 
-    virtual void run(std::string path, std::string commandLine, std::string directory) override;
+    virtual void run(std::string path, std::string commandLine, std::string workingDirectory) override;
     virtual void stop() override;
     virtual bool isRunning() override;
     virtual void writeInput(std::string inputString) override;

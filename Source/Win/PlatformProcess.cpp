@@ -7,7 +7,7 @@
 #include <io.h>
 
 WinProcess::WinProcess()
-    : handle{0}
+    : handle{nullptr}
 {
 }
 
@@ -16,14 +16,14 @@ WinProcess::~WinProcess()
     stop();
 }
 
-void WinProcess::run(std::string path, std::string commandLine, std::string directory)
+void WinProcess::run(std::string path, std::string commandLine, std::string workingDirectory)
 {
     stop();
 
     std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
     auto wpath = converter.from_bytes(path.c_str());
     auto wcommandLine = converter.from_bytes(commandLine.c_str());
-    auto wdirectory = converter.from_bytes(directory.c_str());
+    auto wdirectory = converter.from_bytes(workingDirectory.c_str());
 
 
     pipe = Pipe::create();

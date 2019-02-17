@@ -9,7 +9,7 @@ public:
 
     virtual ~Process() = default;
 
-    virtual void run(std::string path, std::string commandLine, std::string directory) = 0;
+    virtual void run(std::string path, std::string commandLine, std::string workingDirectory) = 0;
     virtual void stop() = 0;
     virtual bool isRunning() = 0;
 
