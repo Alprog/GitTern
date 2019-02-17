@@ -5,6 +5,7 @@
 #include <Commit.h>
 #include <PrettyFormatter.h>
 #include <PrettyField.h>
+#include <CommitDelegate.h>
 
 LogPane::LogPane()
     : QDockWidget("Log", nullptr, nullptr)
@@ -25,13 +26,16 @@ LogPane::LogPane()
     verticalHeader->setVisible(false);
 
 
-    table->setRowHeight(2, table->minimumHeight());
+    //table->setRowHeight(2, table->minimumHeight());
 
     auto item = new QTableWidgetItem("Hello");
     item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
     table->setItem(0, 1, item);
 
     setWidget(table);
+
+    auto commitDelegate = new CommitDelegate();
+    table->setItemDelegateForColumn(0, commitDelegate);
 
     //git log -n 3 --decorate=short --pretty="%H%n%P%n%an (%ae)%n%at%n%s%n%N%n%D%n---%n"
     refresh();
@@ -48,5 +52,7 @@ void LogPane::refresh()
     formatter.addField<std::string>(&Commit::author, "an (%ae)");
     formatter.addField<time_t>(&Commit::timestamp, "%ct");
     formatter.addField<std::string>(&Commit::title, "%s");
+
+
 }
 

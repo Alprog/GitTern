@@ -30,7 +30,7 @@ TEMPLATE = app
 CONFIG += qt
 QT += widgets
 
-subdirs = Source Source/Menu Source/Pretty
+subdirs = Source Source/Menu Source/Pretty Source/LogPane
 
 for(subdir, subdirs) {
     dirs += $$subdir
